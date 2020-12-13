@@ -1,0 +1,75 @@
+{
+  "name": "auth-react-example",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test:dev": "react-scripts test",
+    "test": "CI=true react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "server:run": "cd server/dist && nodemon index.js",
+    "server:build": "cd server && tsc",
+    "server": "npm-run-all --parallel server:*",
+    "start:dev": "npm-run-all --parallel server start",
+    "test:nowatch": "CI=true react-scripts test --env=jsdom"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "@akanass/rx-http-request": "^3.3.0",
+    "@material-ui/core": "^4.10.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-pure-lifecycle": "^3.0.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-router-guards": "^1.0.2",
+    "react-scripts": "3.4.1",
+    "redux": "^4.0.5",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-observable": "^1.2.0",
+    "reselect": "^4.0.0",
+    "rxjs": "^6.5.5"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/redux-mock-store": "^1.0.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "http-proxy-middleware": "^1.0.4",
+    "jest-marbles": "^2.5.1",
+    "node-sass": "^4.14.1",
+    "redux-mock-store": "^1.5.4",
+    "typescript": "~3.7.2",
+    "express": "^4.17.1",
+    "convict": "^5.2.0",
+    "cors": "^2.8.5",
+    "nodemon": "^1.19.4",
+    "npm-run-all": "^4.1.5",
+    "winston": "^3.2.1"
+  }
+}
