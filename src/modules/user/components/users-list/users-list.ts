@@ -1,31 +1,25 @@
 import { AppState } from '../../../../store';
-import { UserState } from '../../store/user.state';
-import { fetchMeAction, fetchUsersAction } from '../../store/user.actions';
-import { Component } from 'react';
+import { fetchUsersAction } from '../../store/user.actions';
 
 export interface UsersListPropsType {
-  component: Component;
-  otherParam: string;
   users: User[];
-  userInfo: UserInfo;
   fetchUsers: () => Action;
-  getMe: () => Action;
 }
 
-export const mapStoreStateToProps = ({ userState }: AppState): UserState => ({
+interface UsersListStoreState {
+  users: User[];
+}
+
+export const mapStoreStateToProps = ({ userState }: AppState): UsersListStoreState => ({
   users: userState.users,
-  userInfo: userState.userInfo,
-  initialized: userState.initialized
 });
 
 export const mapStoreDispatchToProps = ({
-  fetchUsers: fetchUsersAction,
-  getMe: fetchMeAction
+  fetchUsers: fetchUsersAction
 });
 
 export const methods = {
   componentDidMount(props: UsersListPropsType): void {
-    console.log('did mount');
-    props.getMe();
+    props.fetchUsers();
   }
 };

@@ -9,7 +9,7 @@ import configureStore from 'redux-mock-store';
 import lifecycle from 'react-pure-lifecycle';
 import { fetchUsersAction } from '../../store/user.actions';
 
-describe('Gallery Component', () => {
+describe('UsersListComponent', () => {
   const users: User[] = [
     {
       username: 'JohnDoe',

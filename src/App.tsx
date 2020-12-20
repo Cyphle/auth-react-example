@@ -14,7 +14,11 @@ import { ProtectedRoutePropsType } from './shared/protected-route/protected-rout
   - When user is already connected, do not launch action ? check props of protected route when change page
   - Type things
   - Make example with AuthGuard and SuperAdminAuthGuard (by passing a method in protected route component)
-  - Create example with form with stateful component
+      -> Get clients and get users SuperAdminAuth
+      -> Page with current user info AuthGuart
+      -> Header no guard, just current user info
+  - Create example with form with stateful component (like a form)
+      -> Create a client
   - Make tests for all
   - Clean all
  */

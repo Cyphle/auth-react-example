@@ -15,7 +15,7 @@ const MockComponent = (props: any) => (
     </div>
 );
 
-describe('Protected route component', () => {
+describe('ProtectedRouteComponent', () => {
   const userInfo: UserInfo = {
     username: 'john.doe@dodo.fr',
     firstName: 'John',

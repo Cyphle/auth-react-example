@@ -10,12 +10,12 @@ export interface ProtectedRoutePropsType {
   fetchUserInfo: () => Action;
 }
 
-interface UserListStatePropsType {
+interface ProtectedRouteStatePropsType {
   userInfo: UserInfo;
   isAuth: AUTH_STATUS;
 }
 
-export const mapStoreStateToProps = ({ globalState }: AppState): UserListStatePropsType => ({
+export const mapStoreStateToProps = ({ globalState }: AppState): ProtectedRouteStatePropsType => ({
   userInfo: selectUserInfo(globalState),
   isAuth: selectIsAuth(globalState)
 });

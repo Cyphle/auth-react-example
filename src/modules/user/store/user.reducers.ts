@@ -13,12 +13,6 @@ export const userReducers = (state = userInitialState, { type, payload }: Action
         ...state,
         users: []
       };
-    case UserActionTypes.FETCH_ME_SUCCESS:
-      return {
-        ...state,
-        userInfo: payload,
-        initialized: ++state.initialized
-      }
     default:
       return state;
   }
