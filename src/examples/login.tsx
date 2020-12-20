@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import lifecycle from "react-pure-lifecycle";
 import { Header } from '../shared/header/header.component';
 import { AppState } from '../store';
-import { GlobalState } from '../shared/global/global.state';
+import { GlobalState, selectIsAuth } from '../shared/global/global.state';
 import { loadUserInfoAction } from '../shared/global/global.actions';
 import { createSelector } from 'reselect';
 import { HeaderPropsType } from '../shared/header/header';
@@ -24,7 +24,8 @@ const selectCurrentOrganization = createSelector(
 
 export const mapStateToProps = ({ globalState }: AppState): GlobalState => ({
   userInfo: selectUserInfo(globalState),
-  currentOrganization: selectCurrentOrganization(globalState)
+  currentOrganization: selectCurrentOrganization(globalState),
+  authStatus: selectIsAuth(globalState)
 });
 
 export const mapDispatchToProps = ({

@@ -3,6 +3,7 @@ import { createSelector } from 'reselect';
 export interface GlobalState {
   userInfo: UserInfo;
   currentOrganization: Organization;
+  authStatus: AUTH_STATUS;
 }
 
 export const globalInitialState: GlobalState = {
@@ -19,7 +20,8 @@ export const globalInitialState: GlobalState = {
     type: 'TERTIARY',
     applications: [],
     authorizedProperties: []
-  }
+  },
+  authStatus: 'PENDING'
 };
 
 export interface LoadUserInfoAction extends Action {
@@ -47,3 +49,18 @@ export const selectCurrentOrganization = createSelector(
     globalState,
     (state: GlobalState): Organization => state.currentOrganization
 );
+
+export const selectIsAuth = createSelector(
+    globalState,
+    (state: GlobalState): AUTH_STATUS => {
+      if (state.authStatus === 'AUTH') {
+        if (state.userInfo.username.length > 0) {
+          return 'AUTH';
+        } else {
+          return 'NOT_AUTH';
+        }
+      } else {
+        return 'PENDING';
+      }
+    }
+)

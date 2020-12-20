@@ -5,6 +5,8 @@ interface Action {
   payload?: any;
 }
 
+type AUTH_STATUS = 'PENDING' | 'AUTH' | 'NOT_AUTH';
+
 // TODO TO BE DELETED FROM HERE
 interface UserInfo {
   username: string;

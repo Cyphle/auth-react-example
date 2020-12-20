@@ -1,4 +1,4 @@
-import { GlobalState } from "../global/global.state";
+import { GlobalState, selectIsAuth } from '../global/global.state';
 import { createSelector } from "reselect";
 import { loadUserInfoAction } from "../global/global.actions";
 import { AppState } from "../../store";
@@ -21,7 +21,8 @@ const selectCurrentOrganization = createSelector(
 
 export const mapStateToProps = ({ globalState }: AppState): GlobalState => ({
   userInfo: selectUserInfo(globalState),
-  currentOrganization: selectCurrentOrganization(globalState)
+  currentOrganization: selectCurrentOrganization(globalState),
+  authStatus: selectIsAuth(globalState)
 });
 
 export const mapDispatchToProps = ({

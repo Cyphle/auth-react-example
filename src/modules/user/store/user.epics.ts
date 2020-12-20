@@ -31,7 +31,16 @@ export const fetchMeEpic = (getMeRequest: () => Observable<RxHttpRequestResponse
       .pipe(
         mergeMap((action: FetchMeAction) =>
             getMeRequest().pipe(
-            map((response: any) => fetchMeSuccessAction(JSON.parse(response.body))),
+            map((response: any) => {
+              return response.body.length > 0
+              ? fetchMeSuccessAction(JSON.parse(response.body))
+              : fetchMeSuccessAction({
+                username: '',
+                firstName: '',
+                lastName: '',
+                authorities: []
+              })
+            }),
             catchError((error: string) => of(fetchMeFailureAction(error)))
           )
         )

@@ -1,41 +1,41 @@
 import React from 'react';
 import './App.scss';
-import { ConnectedHeader, Header } from './shared/header/header.component';
-import { ConnectedLogin, Login } from './shared/login/login.component';
-import { GuardProvider, GuardedRoute } from 'react-router-guards';
-import { DashBoardLandingPage } from './modules/dashboard/landing-page/landing-page.component';
-import { NotLogged } from './modules/temp/not-logged.component';
-import { BrowserRouter, Link, Route, Switch } from 'react-router-dom';
-import { AuthButton, ConnectedLoginExample, LoginExample } from './examples/login';
-import { Protected, Public } from './examples/components';
-import { ProtectedRoute } from './examples/protected-route';
-import { ConnectedRoot, Root } from './root/root.component';
-import { UserComponent } from './modules/user/user.component';
-import { ConnectedUsersList, UsersList } from './modules/user/components/users-list/users-list.component';
+import { ConnectedLogin } from './shared/login/login.component';
+import { Route, Switch } from 'react-router-dom';
 import { Example } from './modules/example/example';
+import { ConnectedProtectedRoute } from './shared/protected-route/protected-route.component';
+import { ConnectedUsersList } from './modules/user/components/users-list/users-list.component';
+
 
 // TODO
 /*
+  - Make a component a wrapper of all and connected to launch initial action for login
   - Create shared component protected route (which receives isAuth variable?)
   - Type things
-  - Make this component a wrapper of all and connected to launch initial action for login
   - Make example with AuthGuard and SuperAdminAuthGuard (by passing a method in protected route component)
   - Create example with form with stateful component
   - Make tests for all
   - Clean all
  */
+
 export const App = () => (
     <div className="App">
       <Switch>
         <Route path="/login" component={ ConnectedLogin }/>
-        {/*<Route path="/" component={ ConnectedUsersList }/>*/ }
 
-        <Route path="/" render={ (props) => <ConnectedUsersList
+        <Route path="/" render={ (props) => <ConnectedProtectedRoute
             // @ts-ignore
-            otherParam='pouet'
-            component={Example}
+            component={ Example }
             { ...props }
         /> }/>
+
+        {/*<Route path="/" render={ (props) => <ConnectedUsersList*/}
+        {/*    // @ts-ignore*/}
+        {/*    otherParam='pouet'*/}
+        {/*    component={Example}*/}
+        {/*    { ...props }*/}
+        {/*/> }/>*/}
+
         {/*<ConnectedUsersList path='/' />*/ }
         {/*<Route path="/" component={ UserComponent }/>*/ }
         {/*<ConnectedProtectedRoute path='/' component={DashBoardLandingPage} />*/ }

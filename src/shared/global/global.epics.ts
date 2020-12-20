@@ -1,8 +1,8 @@
-import { Observable, of } from "rxjs";
-import { RxHttpRequestResponse } from "@akanass/rx-http-request";
+import { Observable, of } from 'rxjs';
+import { RxHttpRequestResponse } from '@akanass/rx-http-request';
 import { ActionsObservable, StateObservable } from 'redux-observable';
-import { LoadUserInfoAction } from "./global.state";
-import { GlobalActionTypes, loadUserInfoFailureAction, loadUserInfoSuccessAction } from "./global.actions";
+import { LoadUserInfoAction } from './global.state';
+import { GlobalActionTypes, loadUserInfoFailureAction, loadUserInfoSuccessAction } from './global.actions';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { AppState } from '../../store';
 
@@ -14,11 +14,17 @@ export const loadUserInfoEpic = (getUserInfoRequest: () => Observable<RxHttpRequ
                 tap(toto => console.log(state$.value.globalState)),
                 mergeMap((action: LoadUserInfoAction) =>
                     getUserInfoRequest().pipe(
-                        tap((res: any) => console.log(JSON.parse(res.body))),
-                        map((response: any) => loadUserInfoSuccessAction(JSON.parse(response.body))),
+                        map((response: any) => {
+                          return response.body.length > 0
+                              ? loadUserInfoSuccessAction(JSON.parse(response.body))
+                              : loadUserInfoSuccessAction({
+                                username: '',
+                                firstName: '',
+                                lastName: '',
+                                authorities: []
+                              })
+                        }),
                         catchError((error: string) => {
-                          console.log('error');
-                          console.log(error);
                           return of(loadUserInfoFailureAction(error));
                         })
                     )
