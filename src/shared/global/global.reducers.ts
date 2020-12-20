@@ -9,7 +9,7 @@ export const globalReducers = (state = globalInitialState, action: Action): Glob
         ...state,
         userInfo: action.payload,
         currentOrganization: state.currentOrganization.code.length > 0 ? state.currentOrganization : findFirstOrganizationOfUser(action.payload),
-        authStatus: 'AUTH'
+        authStatus: action.payload.username.length > 0 ? 'AUTH' : 'NOT_AUTH'
       };
     case GlobalActionTypes.UPDATE_CURRENT_ORGANIZATION:
       return {

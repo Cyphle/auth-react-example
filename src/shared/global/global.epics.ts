@@ -11,7 +11,6 @@ export const loadUserInfoEpic = (getUserInfoRequest: () => Observable<RxHttpRequ
         action$
             .ofType<LoadUserInfoAction>(GlobalActionTypes.LOAD_USER_INFO)
             .pipe(
-                tap(toto => console.log(state$.value.globalState)),
                 mergeMap((action: LoadUserInfoAction) =>
                     getUserInfoRequest().pipe(
                         map((response: any) => {
@@ -24,9 +23,7 @@ export const loadUserInfoEpic = (getUserInfoRequest: () => Observable<RxHttpRequ
                                 authorities: []
                               })
                         }),
-                        catchError((error: string) => {
-                          return of(loadUserInfoFailureAction(error));
-                        })
+                        catchError((error: string) => of(loadUserInfoFailureAction(error)))
                     )
                 )
             );

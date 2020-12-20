@@ -52,15 +52,5 @@ export const selectCurrentOrganization = createSelector(
 
 export const selectIsAuth = createSelector(
     globalState,
-    (state: GlobalState): AUTH_STATUS => {
-      if (state.authStatus === 'AUTH') {
-        if (state.userInfo.username.length > 0) {
-          return 'AUTH';
-        } else {
-          return 'NOT_AUTH';
-        }
-      } else {
-        return 'PENDING';
-      }
-    }
+    (state: GlobalState): AUTH_STATUS => state.authStatus
 )

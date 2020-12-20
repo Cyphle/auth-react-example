@@ -5,6 +5,8 @@ import { Route, Switch } from 'react-router-dom';
 import { Example } from './modules/example/example';
 import { ConnectedProtectedRoute } from './shared/protected-route/protected-route.component';
 import { ConnectedUsersList } from './modules/user/components/users-list/users-list.component';
+import { RouteComponentProps } from 'react-router';
+import { ProtectedRoutePropsType } from './shared/protected-route/protected-route';
 
 
 // TODO
@@ -23,7 +25,7 @@ export const App = () => (
       <Switch>
         <Route path="/login" component={ ConnectedLogin }/>
 
-        <Route path="/" render={ (props) => <ConnectedProtectedRoute
+        <Route path="/" render={ (props: RouteComponentProps<any> ) => <ConnectedProtectedRoute
             // @ts-ignore
             component={ Example }
             { ...props }

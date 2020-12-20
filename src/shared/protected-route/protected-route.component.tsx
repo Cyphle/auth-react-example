@@ -5,14 +5,6 @@ import { mapStoreDispatchToProps, mapStoreStateToProps, methods, ProtectedRouteP
 import { Redirect, Route } from 'react-router-dom';
 
 export const ProtectedRoute = ({ component: Component, ...props }: ProtectedRoutePropsType) => {
-
-  console.log(props.userInfo);
-  console.log(props.isAuth);
-
-  // EMITS 2 TIMES WHEN LOGGED:
-  // - once initialized with empty username
-  // - once not initialized with not empty username
-
   if (props.isAuth !== 'PENDING') {
     if (props.isAuth === 'AUTH') {
       return (
@@ -27,8 +19,7 @@ export const ProtectedRoute = ({ component: Component, ...props }: ProtectedRout
     }
   } else {
     return (
-        <div>
-        </div>
+        <div></div>
     )
   }
 };
