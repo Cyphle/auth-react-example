@@ -7,7 +7,6 @@ interface Action {
 
 type AUTH_STATUS = 'PENDING' | 'AUTH' | 'NOT_AUTH';
 
-// TODO TO BE DELETED FROM HERE
 interface UserInfo {
   username: string;
   firstName: string;
@@ -45,11 +44,20 @@ type OrganizationType = 'TERTIARY' | 'SOCIAL_HOUSING';
 type Role = 'SUPER_ADMIN' | 'ADMIN' | 'MEMBER' | 'NOT_MEMBER';
 
 type LogoFormat = 'SVG' | 'PNG';
-// TODO TO BE DELETED TO HERE HERE
 
 interface User {
   username: string;
   firstName: string;
   lastName: string;
   email: string;
+}
+
+interface Client {
+  name: string;
+  clientId: string;
+  clientSecret: string;
+  scopes: string[];
+  grantFlows: string[];
+  autoApprove: boolean;
+  redirectUris: string[];
 }

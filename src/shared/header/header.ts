@@ -31,6 +31,7 @@ export const mapDispatchToProps = ({
 
 export const methods = {
   componentDidMount(props: HeaderPropsType): void {
+    // TODO do not lunch action, just get userInfo from store
     props.loadUserInfo();
   }
 };

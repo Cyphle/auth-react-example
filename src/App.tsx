@@ -11,8 +11,7 @@ import { ProtectedRoutePropsType } from './shared/protected-route/protected-rout
 
 // TODO
 /*
-  - Make a component a wrapper of all and connected to launch initial action for login
-  - Create shared component protected route (which receives isAuth variable?)
+  - When user is already connected, do not launch action ? check props of protected route when change page
   - Type things
   - Make example with AuthGuard and SuperAdminAuthGuard (by passing a method in protected route component)
   - Create example with form with stateful component
