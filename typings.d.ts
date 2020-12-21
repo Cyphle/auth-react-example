@@ -65,3 +65,12 @@ interface Client {
   autoApprove: boolean;
   redirectUris: string[];
 }
+
+interface AlreadyExistingClientError {
+    clientId: string;
+}
+
+interface TreatmentResult {
+  data: Client[];
+  errors: AlreadyExistingClientError[];
+}

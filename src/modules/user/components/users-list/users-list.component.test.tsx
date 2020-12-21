@@ -12,10 +12,12 @@ import { fetchUsersAction } from '../../store/user.actions';
 describe('UsersListComponent', () => {
   const users: User[] = [
     {
-      username: 'JohnDoe',
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@dodo.fr'
+      account: {
+        email: 'JohnDoe',
+        firstName: 'John',
+        lastName: 'Doe',
+      },
+      authorities: []
     }
   ];
   const fetchUsersSpy = jest.fn();

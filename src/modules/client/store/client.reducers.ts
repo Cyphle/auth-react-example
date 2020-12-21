@@ -13,6 +13,12 @@ export const clientReducers = (state = ClientInitialState, { type, payload }: Ac
         ...state,
         clients: []
       };
+      // TODO case to be tested
+    case ClientActionTypes.CREATE_CLIENT_SUCCESS:
+      return {
+        ...state,
+        clients: payload.data
+      }
     default:
       return state;
   }

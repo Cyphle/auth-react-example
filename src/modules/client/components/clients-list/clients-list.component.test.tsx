@@ -1,67 +1,73 @@
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import React from 'react';
-import { mapStoreDispatchToProps, mapStoreStateToProps, methods, UsersListPropsType } from './clients-list';
-import { UsersList } from './clients-list.component';
-import { UsersListEntry } from '../clients-list-entry/clients-list-entry.component';
 import { connect, Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import lifecycle from 'react-pure-lifecycle';
-import { fetchUsersAction } from '../../store/user.actions';
+import { ClientsListPropsType, mapStoreDispatchToProps, mapStoreStateToProps, methods } from './clients-list';
+import { fetchClientsAction } from '../../store/client.actions';
+import { ClientsList } from './clients-list.component';
+import { ClientsListEntry } from '../clients-list-entry/clients-list-entry.component';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
-describe('UsersListComponent', () => {
-  const users: User[] = [
+describe('ClientsListComponent', () => {
+  const clients: Client[] = [
     {
-      username: 'JohnDoe',
-      firstName: 'John',
-      lastName: 'Doe',
-      email: 'john.doe@dodo.fr'
+      name: 'My client',
+      clientId: 'clientId',
+      clientSecret: 'clientSecret',
+      scopes: ['user_info'],
+      grantFlows: ['CODE'],
+      autoApprove: true,
+      redirectUris: ['http://localhost:3000/login']
     }
   ];
-  const fetchUsersSpy = jest.fn();
-  const props: UsersListPropsType = {
-    users,
-    fetchUsers: fetchUsersSpy,
+  const fetchClientsSpy = jest.fn();
+  const props: ClientsListPropsType = {
+    clients,
+    fetchClients: fetchClientsSpy,
   };
   const store = configureStore()({
-    userState: {
-      users
+    clientState: {
+      clients
     }
   });
-  const MockConnectedUsersList = connect(
+  const MockConnectedClientsList = connect(
       mapStoreStateToProps,
       ({
         ...mapStoreDispatchToProps,
-        fetchUsers: (): Action => {
-          fetchUsersSpy();
-          return fetchUsersAction();
+        fetchClients: (): Action => {
+          fetchClientsSpy();
+          return fetchClientsAction();
         }
       })
-  )(lifecycle(methods)(UsersList));
+  )(lifecycle(methods)(ClientsList));
+  const history = createMemoryHistory();
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<UsersList { ...props } />, div);
+    ReactDOM.render(<Router history={history}><ClientsList { ...props } /></Router>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
   it('should set props', () => {
-    const wrapper = mount(<UsersList { ...props }/>);
+    const wrapper = mount(<Router history={history}><ClientsList { ...props }/></Router>);
 
-    expect(wrapper.props().users).toEqual(users);
+    expect(wrapper.find(ClientsList).props().clients).toEqual(clients);
   });
 
-  it('should render medias', () => {
-    const wrapper = mount(<UsersList { ...props }/>);
-    const exps = wrapper.find(UsersListEntry);
+  it('should render clients', () => {
+    const wrapper = mount(<Router history={history}><ClientsList { ...props }/></Router>);
+    const exps = wrapper.find(ClientsListEntry);
 
     expect(exps).toHaveLength(1);
   });
 
   it('should launch action when component did mount', () => {
-    const wrapper = mount(<Provider store={ store }><MockConnectedUsersList { ...props }/></Provider>);
+    const wrapper = mount(<Provider store={ store }><Router history={history}><MockConnectedClientsList { ...props }/></Router></Provider>);
 
-    expect((wrapper.find(MockConnectedUsersList).props() as UsersListPropsType).users).toEqual(users);
-    expect(fetchUsersSpy).toHaveBeenCalled();
+    expect((wrapper.find(MockConnectedClientsList).props() as ClientsListPropsType).clients).toEqual(clients);
+    expect(fetchClientsSpy).toHaveBeenCalled();
   });
 });
