@@ -15,9 +15,7 @@ const login = (): void => {
 };
 
 const initiateLogin = (routeRequestedBeforeLogin: string): void => {
-  // TODO check what works
   let redirectUri = '/login';
-  // let redirectUri = '';
   if (routeRequestedBeforeLogin) {
     redirectUri += `?nextRoute=${routeRequestedBeforeLogin}`;
   }

@@ -5,5 +5,5 @@ import { httpClient } from '../common/http-client';
 export const getUserInfoRequest = (): Observable<RxHttpRequestResponse<UserInfo>> =>
     httpClient.get(`${process.env.REACT_APP_BASE_URL}/api/user/me`);
 
-export const getUsersRequest = (): Observable<RxHttpRequestResponse<User[]>> =>
-    httpClient.get(`${process.env.REACT_APP_BASE_URL}/api/users`);
+export const getUsersRequest = (organizationCode: string): Observable<RxHttpRequestResponse<User[]>> =>
+    httpClient.get(`${process.env.REACT_APP_BASE_URL}/api/users?organizationCode=${organizationCode}`);

@@ -1,24 +1,27 @@
-import { userReducers } from './user.reducers';
-import { UserState } from './user.state';
-import { UserActionTypes } from './user.actions';
+import { clientReducers } from './client.reducers';
+import { ClientState } from './client.state';
+import { ClientActionTypes } from './client.actions';
 
-describe('UserReducers', () => {
-  const reducers = userReducers;
-  const users: User[] = [{
-    username: 'JohnDoe',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@dodo.fr'
+describe('ClientReducers', () => {
+  const reducers = clientReducers;
+  const clients: Client[] = [{
+    name: 'client one',
+    clientId: 'clientId',
+    clientSecret: 'clientSecret',
+    scopes: ['write_scope'],
+    grantFlows: ['CODE'],
+    autoApprove: true,
+    redirectUris: ['redirecturi.fr']
   }];
-  let initialState: UserState;
-  let anotherInitialState: UserState;
+  let initialState: ClientState;
+  let anotherInitialState: ClientState;
 
   beforeEach(() => {
     initialState = {
-      users: []
+      clients: []
     };
     anotherInitialState = {
-      users
+      clients
     };
   });
   
@@ -32,8 +35,8 @@ describe('UserReducers', () => {
 
   it('should update state when fetch users success action', () => {
     const action = {
-      type: UserActionTypes.FETCH_USERS_SUCCESS,
-      payload: users
+      type: ClientActionTypes.FETCH_CLIENTS_SUCCESS,
+      payload: clients
     };
 
     const state = reducers(initialState, action);
@@ -43,7 +46,7 @@ describe('UserReducers', () => {
 
   it('should update state when fetch users failure action', () => {
     const action = {
-      type: UserActionTypes.FETCH_USERS_FAILURE,
+      type: ClientActionTypes.FETCH_CLIENTS_FAILURE,
       payload: 'Error'
     };
 

@@ -7,7 +7,7 @@ import { UsersListEntry } from '../users-list-entry/users-list-entry.component';
 export const UsersList = (props: UsersListPropsType) => (
   <div>
     { props.users.map(user => (
-        <div key={ user.username }>
+        <div key={ user.account.email }>
           <UsersListEntry { ...user } />
         </div>
     )) }

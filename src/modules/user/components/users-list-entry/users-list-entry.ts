@@ -1,6 +1,4 @@
 export interface UsersListEntryPropsType {
-  username: string;
-  firstName: string;
-  lastName: string;
-  email: string;
+  account: AccountView;
+  authorities: Authority[];
 }

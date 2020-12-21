@@ -6,7 +6,7 @@ export interface GlobalState {
   authStatus: AUTH_STATUS;
 }
 
-export const globalInitialState: GlobalState = {
+export const GlobalInitialState: GlobalState = {
   userInfo: {
     username: '',
     firstName: '',

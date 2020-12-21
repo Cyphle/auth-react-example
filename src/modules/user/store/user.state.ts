@@ -2,7 +2,7 @@ export interface UserState {
   users: User[];
 }
 
-export const userInitialState: UserState = {
+export const UserInitialState: UserState = {
   users: []
 };
 

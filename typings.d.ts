@@ -46,10 +46,14 @@ type Role = 'SUPER_ADMIN' | 'ADMIN' | 'MEMBER' | 'NOT_MEMBER';
 type LogoFormat = 'SVG' | 'PNG';
 
 interface User {
-  username: string;
+  account: AccountView;
+  authorities: Authority[];
+}
+
+interface AccountView {
+  email: string;
   firstName: string;
   lastName: string;
-  email: string;
 }
 
 interface Client {

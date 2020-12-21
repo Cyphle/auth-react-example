@@ -1,8 +1,8 @@
-import { globalInitialState, GlobalState } from "./global.state";
+import { GlobalInitialState, GlobalState } from "./global.state";
 import { GlobalActionTypes } from "./global.actions";
 import { findFirstOrganizationOfUser, findOrganizationByCode } from "../../common/helpers/user-info.extractors";
 
-export const globalReducers = (state = globalInitialState, action: Action): GlobalState => {
+export const globalReducers = (state = GlobalInitialState, action: Action): GlobalState => {
   switch (action.type) {
     case GlobalActionTypes.LOAD_USER_INFO_SUCCESS:
       return {

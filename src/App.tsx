@@ -4,15 +4,14 @@ import { ConnectedLogin } from './shared/login/login.component';
 import { Route, Switch } from 'react-router-dom';
 import { Example } from './modules/example/example';
 import { ConnectedProtectedRoute } from './shared/protected-route/protected-route.component';
-import { ConnectedUsersList } from './modules/user/components/users-list/users-list.component';
+import { ConnectedUsersList, UsersList } from './modules/user/components/users-list/users-list.component';
 import { RouteComponentProps } from 'react-router';
 import { ProtectedRoutePropsType } from './shared/protected-route/protected-route';
+import { ConnectedClientsList } from './modules/client/components/clients-list/clients-list.component';
 
 
 // TODO
 /*
-  - When user is already connected, do not launch action ? check props of protected route when change page
-  - Type things
   - Make example with AuthGuard and SuperAdminAuthGuard (by passing a method in protected route component)
       -> Get clients and get users SuperAdminAuth
       -> Page with current user info AuthGuart
@@ -21,6 +20,8 @@ import { ProtectedRoutePropsType } from './shared/protected-route/protected-rout
       -> Create a client
   - Make tests for all
   - Clean all
+  - Add https://material-ui.com/
+  - After login does not redirect to asked page
  */
 
 export const App = () => (
@@ -28,9 +29,14 @@ export const App = () => (
       <Switch>
         <Route path="/login" component={ ConnectedLogin }/>
 
-        <Route path="/" render={ (props: RouteComponentProps<any> ) => <ConnectedProtectedRoute
+        <Route path="/users" render={ (props: RouteComponentProps<any> ) => <ConnectedProtectedRoute
             // @ts-ignore
-            component={ Example }
+            component={ ConnectedUsersList }
+            { ...props }
+        /> }/>
+        <Route path="/clients" render={ (props: RouteComponentProps<any> ) => <ConnectedProtectedRoute
+            // @ts-ignore
+            component={ ConnectedClientsList }
             { ...props }
         /> }/>
 
