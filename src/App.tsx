@@ -11,12 +11,13 @@ import { ConnectedHeader } from './shared/header/header.component';
 import { ConnectedClientDetails } from './modules/client/components/client-details/client-details.component';
 import { ConnectedCreateClient } from './modules/client/components/create-client/create-client.component';
 import { useCookies } from 'react-cookie';
+import { ProtectedRouteWrapper } from './shared/protected-route/protected-route-wrapper.component';
 
 
 // TODO
 /*
-  - protected route accept method to check authorization of current user or redirect
   - wrap the protected route to do not have ts ignore everywhere
+  - protected route accept method to check authorization of current user or redirect
   - Make tests for all
   - Clean all
   - Add https://material-ui.com/
@@ -35,16 +36,14 @@ export const App = () => {
           <Route path="/login" component={ ConnectedLogin }/>
           <Route exact path="/" component={ ConnectedDashboard }/>
 
-          <Route path="/users" render={ (props: RouteComponentProps<any>) => <ConnectedProtectedRoute
-              // @ts-ignore
-              component={ ConnectedUsersList }
-              { ...props }
-          /> }/>
-          <Route exact path="/clients" render={ (props: RouteComponentProps<any>) => <ConnectedProtectedRoute
-              // @ts-ignore
-              component={ ConnectedClientsList }
-              { ...props }
-          /> }/>
+          <ProtectedRouteWrapper
+            component={ConnectedUsersList}
+            path="/users"
+          />
+          <ProtectedRouteWrapper
+            component={ConnectedClientsList}
+            path="/clients"
+          />
 
           <Route path="/clients/:clientId" children={ <ConnectedClientDetails/> }/>
           <Route path="/create-client" children={ <ConnectedCreateClient cookies={ cookies[0] }/> }/>
