@@ -28,7 +28,8 @@ describe('ProtectedRouteComponent', () => {
     component: MockComponent,
     userInfo,
     isAuth: 'AUTH',
-    fetchUserInfo: fetchUserInfoSpy
+    fetchUserInfo: fetchUserInfoSpy,
+    guard: (userInfo: UserInfo) => ''
   };
   const store = configureStore()({
     globalState: {

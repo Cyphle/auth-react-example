@@ -8,6 +8,7 @@ export interface ProtectedRoutePropsType {
   userInfo: UserInfo;
   isAuth: AUTH_STATUS;
   fetchUserInfo: () => Action;
+  guard: (userInfo: UserInfo) => string;
 }
 
 interface ProtectedRouteStatePropsType {

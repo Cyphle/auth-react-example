@@ -5,22 +5,30 @@ import { mapStoreDispatchToProps, mapStoreStateToProps, methods, ProtectedRouteP
 import { Redirect, Route } from 'react-router-dom';
 
 export const ProtectedRoute = ({ component: Component, ...props }: ProtectedRoutePropsType) => {
-  if (props.isAuth !== 'PENDING') {
-    if (props.isAuth === 'AUTH') {
-      return (
-          // @ts-ignore
-          <Route { ...props } render={ (props) => <Component {...props } /> } />
-      )
-    } else {
+  switch (props.isAuth) {
+    case 'AUTH':
+      const guardResult = props.guard(props.userInfo);
+      if (guardResult.length === 0) {
+        return (
+            // @ts-ignore
+            <Route { ...props } render={ (props) => <Component {...props } /> } />
+        )
+      } else {
+        return (
+            <Route { ...props }
+                   render={ (props) => <Redirect to={ { pathname: guardResult, state: { from: props.location } } }/> }/>
+        )
+      }
+    case 'NOT_AUTH':
       return (
           <Route { ...props }
                  render={ (props) => <Redirect to={ { pathname: '/login', state: { from: props.location } } }/> }/>
       )
-    }
-  } else {
-    return (
-        <div></div>
-    )
+    case 'PENDING':
+    default:
+      return (
+          <div></div>
+      )
   }
 };
 
