@@ -15,9 +15,7 @@ import { superAdminGuard } from './guards/super-admin.guard';
 
 // TODO
 /*
-  - Clean all
   - Add https://material-ui.com/
-  - After login does not redirect to asked page
  */
 
 export const App = () => {

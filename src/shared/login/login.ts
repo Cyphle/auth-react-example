@@ -1,16 +1,16 @@
 export const methods = {
   componentDidMount(props: any): void {
-    login();
+    login(props.location.state !== undefined ? props.location.state.from.pathname : '');
   }
 };
 
-const login = (): void => {
+const login = (routeRequestedBeforeLogin: string): void => {
   const { nextRoute, code, state } = extractRouteParams(window.location.href);
 
   if (code != null) {
     completeLoginWithCode(nextRoute, state, code);
   } else {
-    initiateLogin(nextRoute);
+    initiateLogin(routeRequestedBeforeLogin);
   }
 };
 
