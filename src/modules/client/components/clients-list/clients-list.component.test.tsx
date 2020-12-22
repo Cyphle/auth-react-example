@@ -10,6 +10,7 @@ import { ClientsList } from './clients-list.component';
 import { ClientsListEntry } from '../clients-list-entry/clients-list-entry.component';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
+import { ClientTableRow } from '../clients-list-entry/client-table-row.component';
 
 describe('ClientsListComponent', () => {
   const clients: Client[] = [
@@ -59,7 +60,7 @@ describe('ClientsListComponent', () => {
 
   it('should render clients', () => {
     const wrapper = mount(<Router history={history}><ClientsList { ...props }/></Router>);
-    const exps = wrapper.find(ClientsListEntry);
+    const exps = wrapper.find(ClientTableRow);
 
     expect(exps).toHaveLength(1);
   });

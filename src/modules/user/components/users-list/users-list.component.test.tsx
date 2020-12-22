@@ -3,11 +3,11 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { mapStoreDispatchToProps, mapStoreStateToProps, methods, UsersListPropsType } from './users-list';
 import { UsersList } from './users-list.component';
-import { UsersListEntry } from '../users-list-entry/users-list-entry.component';
 import { connect, Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import lifecycle from 'react-pure-lifecycle';
 import { fetchUsersAction } from '../../store/user.actions';
+import { UserListItem } from '../users-list-entry/user-list-item.component';
 
 describe('UsersListComponent', () => {
   const users: User[] = [
@@ -55,7 +55,7 @@ describe('UsersListComponent', () => {
 
   it('should render medias', () => {
     const wrapper = mount(<UsersList { ...props }/>);
-    const exps = wrapper.find(UsersListEntry);
+    const exps = wrapper.find(UserListItem);
 
     expect(exps).toHaveLength(1);
   });

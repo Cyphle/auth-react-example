@@ -1,6 +1,7 @@
 import React from 'react';
 import { ClientsListEntryPropsType } from './clients-list-entry';
 import { Link } from 'react-router-dom';
+import { TableCell, TableRow } from '@material-ui/core';
 
 export const ClientsListEntry = (props: ClientsListEntryPropsType) => (
   <div>
@@ -9,3 +10,4 @@ export const ClientsListEntry = (props: ClientsListEntryPropsType) => (
       <div><Link to={ `/clients/${props.clientId}` }>Go to</Link></div>
   </div>
 );
+
