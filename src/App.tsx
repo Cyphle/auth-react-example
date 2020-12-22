@@ -12,12 +12,6 @@ import { useCookies } from 'react-cookie';
 import { ProtectedRouteWrapper } from './shared/protected-route/protected-route-wrapper.component';
 import { superAdminGuard } from './guards/super-admin.guard';
 
-
-// TODO
-/*
-  - Add https://material-ui.com/
- */
-
 export const App = () => {
   const cookies = useCookies(['XSRF-TOKEN']);
 
