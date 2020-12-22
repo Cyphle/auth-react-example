@@ -5,10 +5,12 @@ import { UserActionTypes } from './user.actions';
 describe('UserReducers', () => {
   const reducers = userReducers;
   const users: User[] = [{
-    username: 'JohnDoe',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@dodo.fr'
+    account: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@dodo.fr'
+    },
+    authorities: []
   }];
   let initialState: UserState;
   let anotherInitialState: UserState;

@@ -110,7 +110,7 @@ describe('UserInfo Extractors', () => {
       code: '',
       name: '',
       logo: '',
-      type: null,
+      type: 'TERTIARY',
       applications: [],
       authorizedProperties: []
     });
@@ -141,7 +141,7 @@ describe('UserInfo Extractors', () => {
       code: '',
       name: '',
       logo: '',
-      type: null,
+      type: 'TERTIARY',
       applications: [],
       authorizedProperties: []
     });

@@ -24,7 +24,6 @@ export const fetchClientsEpic = (getClientsRequest: () => Observable<RxHttpReque
         )
       );
 
-// TODO to be tested
 export const createClientEpic = (createClientsRequest: (client: Client, csrfToken: string) => Observable<RxHttpRequestResponse<TreatmentResult>>) =>
   (action$: ActionsObservable<Action>): any =>
     action$

@@ -25,6 +25,9 @@ describe('CreateClientComponent', () => {
   const createClientSpy = jest.fn();
   const props: CreateClientPropsType = {
     createClient: createClientSpy,
+    cookies: {
+      'XSRF-TOKEN': 'csrf-token'
+    }
   };
   const store = configureStore()({});
   const MockConnectedCreateClient = connect(
@@ -32,9 +35,8 @@ describe('CreateClientComponent', () => {
       ({
         ...mapStoreDispatchToProps,
         createClient: (client: Client): Action => {
-          console.log('cocou');
-          createClientSpy();
-          return createClientAction(client);
+          createClientSpy(client, 'csrf-token');
+          return createClientAction(client, 'csrf-token');
         }
       })
   )(CreateClientComponent);
@@ -64,15 +66,15 @@ describe('CreateClientComponent', () => {
 
     instance.handleSubmit(mockEvent);
 
-    expect(createClientSpy).toHaveBeenCalledWith(client);
+    expect(createClientSpy).toHaveBeenCalledWith(client, 'csrf-token');
   });
 
   it('should launch action when connected', () => {
     // @ts-ignore
     const wrapper = mount(<Provider store={ store }><MockConnectedCreateClient { ...props }/></Provider>);
 
-    (wrapper.find(MockConnectedCreateClient).props() as CreateClientPropsType).createClient(client);
+    (wrapper.find(MockConnectedCreateClient).props() as CreateClientPropsType).createClient(client, 'csrf-token');
 
-    expect(createClientSpy).toHaveBeenCalledWith(client);
+    expect(createClientSpy).toHaveBeenCalledWith(client, 'csrf-token');
   });
 });

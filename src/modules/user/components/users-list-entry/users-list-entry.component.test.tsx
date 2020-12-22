@@ -6,10 +6,12 @@ import { UsersListEntry } from './users-list-entry.component';
 
 describe('UsersListEntry Component', () => {
   const user: User = {
-    username: 'JohnDoe',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@dodo.fr'
+    account: {
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john.doe@dodo.fr'
+    },
+    authorities: []
   };
   const props: UsersListEntryPropsType = {
     ...user
@@ -24,16 +26,15 @@ describe('UsersListEntry Component', () => {
   it('should set props', () => {
     const wrapper = mount(<UsersListEntry { ...props }/>);
 
-    expect(wrapper.props().username).toEqual('JohnDoe');
-    expect(wrapper.props().firstName).toEqual('John');
-    expect(wrapper.props().lastName).toEqual('Doe');
-    expect(wrapper.props().email).toEqual('john.doe@dodo.fr');
+    expect(wrapper.props().account.firstName).toEqual('John');
+    expect(wrapper.props().account.lastName).toEqual('Doe');
+    expect(wrapper.props().account.email).toEqual('john.doe@dodo.fr');
   });
 
   it('should render user', () => {
     const wrapper = mount(<UsersListEntry { ...props }/>);
     const exps = wrapper.find('.username');
 
-    expect(exps.get(0)).toEqual(<div className="username">JohnDoe</div>);
+    expect(exps.get(0)).toEqual(<div className="username">john.doe@dodo.fr</div>);
   });
 });

@@ -1,39 +1,44 @@
 import ReactDOM from 'react-dom';
 import { mount } from 'enzyme';
 import React from 'react';
-import { UsersListEntryPropsType } from './clients-list-entry';
-import { UsersListEntry } from './clients-list-entry.component';
+import { ClientsListEntryPropsType } from './clients-list-entry';
+import { ClientsListEntry } from './clients-list-entry.component';
+import { Router } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
-describe('UsersListEntry Component', () => {
-  const user: User = {
-    username: 'JohnDoe',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'john.doe@dodo.fr'
+describe('ClientsListEntry Component', () => {
+  const clients: Client[] = [
+    {
+      name: 'My client',
+      clientId: 'clientId',
+      clientSecret: 'clientSecret',
+      scopes: ['user_info'],
+      grantFlows: ['CODE'],
+      autoApprove: true,
+      redirectUris: ['http://localhost:3000/login']
+    }
+  ];
+  const props: ClientsListEntryPropsType = {
+    ...clients[0]
   };
-  const props: UsersListEntryPropsType = {
-    ...user
-  };
+  const history = createMemoryHistory();
 
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<UsersListEntry { ...props } />, div);
+    ReactDOM.render(<Router history={history}><ClientsListEntry { ...props } /></Router>, div);
     ReactDOM.unmountComponentAtNode(div);
   });
 
   it('should set props', () => {
-    const wrapper = mount(<UsersListEntry { ...props }/>);
+    const wrapper = mount(<Router history={history}><ClientsListEntry { ...props }/></Router>);
 
-    expect(wrapper.props().username).toEqual('JohnDoe');
-    expect(wrapper.props().firstName).toEqual('John');
-    expect(wrapper.props().lastName).toEqual('Doe');
-    expect(wrapper.props().email).toEqual('john.doe@dodo.fr');
+    expect(wrapper.find(ClientsListEntry).props().name).toEqual('My client');
   });
 
-  it('should render user', () => {
-    const wrapper = mount(<UsersListEntry { ...props }/>);
-    const exps = wrapper.find('.username');
+  it('should render client entry', () => {
+    const wrapper = mount(<Router history={history}><ClientsListEntry { ...props }/></Router>);
+    const exps = wrapper.find('.name');
 
-    expect(exps.get(0)).toEqual(<div className="username">JohnDoe</div>);
+    expect(exps.get(0)).toEqual(<div className="name">My client</div>);
   });
 });

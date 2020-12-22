@@ -54,4 +54,21 @@ describe('ClientReducers', () => {
 
     expect(state).toEqual(initialState);
   });
+
+  it('should update state when create client success', () => {
+    const action = {
+      type: ClientActionTypes.CREATE_CLIENT_SUCCESS,
+      payload: {
+        data: clients,
+        errors: []
+      }
+    };
+
+    const state = reducers(initialState, action);
+
+    expect(state).toEqual({
+      ...initialState,
+      clients
+    });
+  });
 });

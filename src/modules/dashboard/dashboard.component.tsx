@@ -4,7 +4,6 @@ import React from 'react';
 import { DashboardPropsType, mapStoreDispatchToProps, mapStoreStateToProps, methods } from './dashboard';
 
 export const DashBoard = (props: DashboardPropsType) => {
-  console.log(props);
   return (
       <div>
         Bonjour ! Here is a home page that displays info when connected.<br/>

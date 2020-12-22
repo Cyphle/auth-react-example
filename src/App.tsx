@@ -29,6 +29,7 @@ export const App = () => {
   return (
       <div className="App">
         <ConnectedHeader/>
+        <h1>Hello React OAuth2 Example</h1>
 
         <Switch>
           <Route path="/login" component={ ConnectedLogin }/>
