@@ -6,14 +6,17 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { CookiesProvider } from 'react-cookie';
 
 ReactDOM.render(
     <React.StrictMode>
       <Provider store={ store }>
-        <Router>
-          <App/>
-        </Router>
-      </Provider>,
+        <CookiesProvider>
+          <Router>
+            <App/>
+          </Router>
+        </CookiesProvider>
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
 );

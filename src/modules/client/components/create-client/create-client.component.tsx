@@ -7,6 +7,7 @@ import {
   mapStoreDispatchToProps,
   mapStoreStateToProps
 } from './create-client';
+import { CSRF_COOKIE } from '../../../../common/helpers/constants';
 
 export class CreateClientComponent extends React.Component<CreateClientPropsType, CreateClientStateType> {
   constructor(props: CreateClientPropsType) {
@@ -26,24 +27,27 @@ export class CreateClientComponent extends React.Component<CreateClientPropsType
     this.setState({ name: target.value })
   }
 
-  handleChangeClientId = ({ target }: { target: { value: string }}): void => {
+  handleChangeClientId = ({ target }: { target: { value: string } }): void => {
     this.setState({ clientId: target.value });
   }
 
-  handleChangeClientSecret = ({ target }: { target: { value: string }}): void => {
+  handleChangeClientSecret = ({ target }: { target: { value: string } }): void => {
     this.setState({ clientSecret: target.value });
   }
 
   handleSubmit = (event: any) => {
-    this.props.createClient({
-      name: this.state.name,
-      clientId: this.state.clientId,
-      clientSecret: this.state.clientSecret,
-      scopes: this.state.scopes,
-      grantFlows: this.state.grantFlows,
-      autoApprove: this.state.autoApprove,
-      redirectUris: this.state.redirectUris
-    })
+    this.props.createClient(
+        {
+          name: this.state.name,
+          clientId: this.state.clientId,
+          clientSecret: this.state.clientSecret,
+          scopes: this.state.scopes,
+          grantFlows: this.state.grantFlows,
+          autoApprove: this.state.autoApprove,
+          redirectUris: this.state.redirectUris
+        },
+        this.props.cookies[CSRF_COOKIE]
+    );
     event.preventDefault();
   }
 
@@ -52,17 +56,18 @@ export class CreateClientComponent extends React.Component<CreateClientPropsType
         <form onSubmit={ this.handleSubmit }>
           <div className="form-group">
             <label htmlFor="name">Nom </label>
-            <input id="name" type="text" value={ this.state.name } onChange={ this.handleChangeName } />
+            <input id="name" type="text" value={ this.state.name } onChange={ this.handleChangeName }/>
           </div>
 
           <div className="form-group">
             <label htmlFor="client-id">Client Id </label>
-            <input id="client-id" type="text" value={ this.state.clientId } onChange={ this.handleChangeClientId } />
+            <input id="client-id" type="text" value={ this.state.clientId } onChange={ this.handleChangeClientId }/>
           </div>
 
           <div className="form-group">
             <label htmlFor="client-secret">Client secret </label>
-            <input id="client-secret" type="text" value={ this.state.clientSecret } onChange={ this.handleChangeClientSecret } />
+            <input id="client-secret" type="text" value={ this.state.clientSecret }
+                   onChange={ this.handleChangeClientSecret }/>
           </div>
 
           <input type="submit" value="Envoyer"/>

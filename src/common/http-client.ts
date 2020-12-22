@@ -3,20 +3,22 @@ import { RxHR } from '@akanass/rx-http-request';
 export const httpClient = (client => {
   return {
     get: (uri: string, options?: any) => {
+      const headers = options !== undefined && options !== null
+          ? { ...options.headers }
+          : { };
       options = {
         ...options,
-        //   headers: {
-        //   'Authorization': 'token'
-        // }
+        headers
       };
-      return client.get(`${uri}`, options);
+      return client.get(`${ uri }`, options);
     },
     post: (uri: string, body: any, options?: any) => {
+      const headers = options !== undefined && options !== null
+          ? { ...options.headers, 'Accept': 'application/json' }
+          : { 'Accept': 'application/json' };
       options = {
         ...options,
-        headers: {
-          'Accept': 'application/json'
-        },
+        headers,
         body,
         json: true
       };

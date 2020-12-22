@@ -12,6 +12,7 @@ export const Header = (props: HeaderPropsType) => (
           <Link to="/">Home</Link>
           <Link to="/users">Users</Link>
           <Link to="/clients">Clients</Link>
+          <Link to="/create-client">Create client</Link>
         </nav>
       </header>
 

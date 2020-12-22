@@ -25,15 +25,15 @@ export const fetchClientsEpic = (getClientsRequest: () => Observable<RxHttpReque
       );
 
 // TODO to be tested
-export const createClientEpic = (createClientsRequest: (client: Client) => Observable<RxHttpRequestResponse<TreatmentResult>>) =>
+export const createClientEpic = (createClientsRequest: (client: Client, csrfToken: string) => Observable<RxHttpRequestResponse<TreatmentResult>>) =>
   (action$: ActionsObservable<Action>): any =>
     action$
       .ofType<CreateClientAction>(ClientActionTypes.CREATE_CLIENT)
       .pipe(
         mergeMap((action: CreateClientAction) =>
-            createClientsRequest(action.payload).pipe(
-            map((response: any) => createClientSuccessAction(JSON.parse(response.body).data.map((a: Client) => ({ ...a })))),
-            catchError((error: string) => of(createClientFailureAction(error)))
-          )
+            createClientsRequest(action.payload.client, action.payload.csrfToken).pipe(
+                map((response: any) => createClientSuccessAction(JSON.parse(response.body).data.map((a: Client) => ({ ...a })))),
+                catchError((error: string) => of(createClientFailureAction(error)))
+            )
         )
       );

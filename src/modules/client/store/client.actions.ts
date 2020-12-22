@@ -30,9 +30,9 @@ export const fetchClientsFailureAction = (error: string): FetchClientsFailureAct
   payload: error
 });
 
-export const createClientAction = (client: Client): CreateClientAction => ({
+export const createClientAction = (client: Client, csrfToken: string): CreateClientAction => ({
   type: ClientActionTypes.CREATE_CLIENT,
-  payload: client
+  payload: { client, csrfToken }
 });
 
 export const createClientSuccessAction = (result: TreatmentResult): CreateClientSuccessAction => ({

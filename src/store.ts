@@ -10,8 +10,8 @@ import { userReducers } from './modules/user/store/user.reducers';
 import { fetchUsersEpic } from './modules/user/store/user.epics';
 import { ClientInitialState, ClientState } from './modules/client/store/client.state';
 import { clientReducers } from './modules/client/store/client.reducers';
-import { fetchClientsEpic } from './modules/client/store/client.epics';
-import { getClientsRequest } from './services/client.service';
+import { createClientEpic, fetchClientsEpic } from './modules/client/store/client.epics';
+import { createClientsRequest, getClientsRequest } from './services/client.service';
 
 export interface AppState {
   globalState: GlobalState;
@@ -34,7 +34,8 @@ const rootReducer = combineReducers({
 const rootEpic = (): any => combineEpics(
     loadUserInfoEpic(getUserInfoRequest),
     fetchUsersEpic(getUsersRequest),
-    fetchClientsEpic(getClientsRequest)
+    fetchClientsEpic(getClientsRequest),
+    createClientEpic(createClientsRequest)
 );
 
 const epicMiddleware = createEpicMiddleware();

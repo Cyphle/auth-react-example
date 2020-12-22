@@ -2,7 +2,8 @@ import { AppState } from '../../../../store';
 import { createClientAction } from '../../store/client.actions';
 
 export interface CreateClientPropsType {
-  createClient: (client: Client) => Action;
+  createClient: (client: Client, csrfToken: string) => Action;
+  cookies: { [key: string]: string }
 }
 
 export interface CreateClientStateType {

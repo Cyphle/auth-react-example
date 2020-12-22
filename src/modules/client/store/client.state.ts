@@ -20,7 +20,7 @@ export interface FetchClientsFailureAction extends Action {
 }
 
 export interface CreateClientAction extends Action {
-  payload: Client;
+  payload: { client: Client, csrfToken: string };
 }
 
 export interface CreateClientSuccessAction extends Action {
